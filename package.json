@@ -1,0 +1,16 @@
+{
+  "name": "typescript-preso",
+  "private": true,
+  "scripts": {
+    "start": "mdx-deck src/index.mdx",
+    "build": "mdx-deck build src/index.mdx",
+    "pdf": "mdx-deck pdf src/index.mdx",
+    "image": "mdx-deck screenshot src/index.mdx",
+    "help": "mdx-deck"
+  },
+  "devDependencies": {
+    "mdx-deck": "^1.6.7",
+    "mdx-deck-code-surfer": "^0.5.3",
+    "raw-loader": "^0.5.1"
+  }
+}
