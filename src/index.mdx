@@ -1,10 +1,10 @@
-import { Head, Appear, Image } from "mdx-deck"
-import { Split } from "mdx-deck/layouts"
+import { Head, Appear, Image } from 'mdx-deck';
+import { Split } from 'mdx-deck/layouts';
 
-import { SmallText } from "./components/SmallText.js"
-import { Text } from "./components/Text.js"
+import { SmallText } from './components/SmallText.js';
+import { Text } from './components/Text.js';
 
-export { theme } from "./theme"
+export { theme } from './theme';
 
 <Head>
   <title>TypeScript</title>
@@ -12,17 +12,17 @@ export { theme } from "./theme"
 
 ![](assets/images/ts-logo.png)
 
-_What?!_
+---
 
-<SmallText>and</SmallText>
+# _Why?!_
 
-_Why?!_
+---
 
 ---
 
 # 🔮
 
-# 30 minutes from now
+# 45 minutes from now
 
 <Appear>
   <img src="assets/images/yawn.png" />
@@ -32,21 +32,17 @@ _Why?!_
 
 # 🔮
 
-# 30 minutes from now
+# 45 minutes from now
 
 <Appear>
   <div>
-    <Text>
-      1. You know <em>what</em> TS is
-    </Text>
+    <Text>1. You know why TS exists</Text>
   </div>
   <div>
-    <Text>
-      2. You know <em>why</em> people use TS
-    </Text>
+    <Text>2. You know why developers use (and love) TS</Text>
   </div>
   <div>
-    <Text>3. You really really wanna give TS a go! 🤞</Text>
+    <Text>3. 🤞 You really really wanna give TS a go! 🤞</Text>
   </div>
 </Appear>
 
@@ -57,7 +53,220 @@ _Why?!_
 
 ---
 
-# What is TS?
+# How do you prevent bugs in your code?
+
+```notes
+NOT a rhetorical question. Get some answers!
+```
+
+---
+
+# Documentation!
+
+---
+
+<Appear>
+  <div>
+    <Text>- Name everything correctly</Text>
+  </div>
+  <div>
+    <Text>- Sprinkle around some JSDoc when needed</Text>
+  </div>
+</Appear>
+
+---
+
+```js
+function getUsersInSuburb(suburb) {
+  return getPeople().filter(u => u.suburb === suburb);
+}
+
+/**
+ * @param somebody - A person from the database
+ */
+function sendGifts(somebody) {}
+
+/**
+ * @property {Object} person
+ * @property {string} person.name
+ * @property {number} person.age
+ */
+function logUser(user) {
+  console.log(`${user.firstName} ${user.lastName} - ${user.age}`);
+}
+```
+
+---
+
+# Documentation 😞
+
+- ❌ Easily out of date
+- ❌ Difficult to refactor
+- ❌ Ambiguous
+- ❌ Often ignored
+- ✅ Sometimes useful (e.g. hacks)
+
+---
+
+# How do you prevent bugs in your code?
+
+---
+
+# Defensive coding!
+
+---
+
+```js
+function startApp(app, port) {
+  if (port === undefined) {
+    throw new TypeError('Port is required');
+  }
+  if (!Number.isInteger(port)) {
+    throw new TypeError('Port must be a number');
+  }
+  // ...
+}
+```
+
+---
+
+```js
+if (person.firstName && person.lastName) {
+  sayHello(person);
+}
+```
+
+---
+
+```js
+function sendGifts(somebody) {
+  const countryCode =
+    somebody &&
+    somebody.address &&
+    somebody.address.country &&
+    somebody.address.shortCode;
+
+  if (!countryCode) {
+    return;
+  }
+}
+```
+
+---
+
+# Defensive coding
+
+- ❌ A lot of code to write, read, and maintain
+- ❌ Easy to forget checking something
+- ❌ Easy to get wrong
+- ❌ Code anxiety
+- ✅ Interacting with unpredictable sources (e.g. user input, external APIs)
+
+```notes
+1. "What's this code for?" - "Oh, just to be safe" 🙄
+
+- Anxiety = Will I receive the right inputs? Do I trust this function before passing in the inputs?
+```
+
+---
+
+# How do you prevent bugs in your code?
+
+---
+
+# Unit tests!
+
+---
+
+```js
+test('it should throw an error when person is undefined', () => {
+  expect(() => sendGifts()).toThrow();
+});
+test('it should throw an error when person is null', () => {
+  expect(() => sendGifts(null)).toThrow();
+});
+test('it should throw an error when person is empty', () => {
+  expect(() => sendGifts({})).toThrow();
+});
+test('it should throw an error when missing address', () => {
+  expect(() => sendGifts(userWithNoAddress)).toThrow();
+});
+test('it should throw an error when missing country code', () => {
+  expect(() => sendGifts(userWithNoCountryCode)).toThrow();
+});
+```
+
+```notes
+Testing *one* parameter for *one* function
+```
+
+---
+
+# Unit tests 😞
+
+- ❌ Lots of code to write, read, and maintain
+- ❌ You need to test _a lot_ (every function, every param, every response)
+- ❌ Easy to forget to test something - things slip through the cracks
+- ❌ Annoying to maintain - update code, then fix unit tests
+- ✅ Testing business logic and custom features
+
+---
+
+# How do you prevent bugs in your code?
+
+---
+
+# YOLO!
+
+"If someone calls my function incorrectly,
+I'm sure an error will happen _eventually_"
+
+---
+
+```
+Uncaught TypeError: Cannot read property 'name' of undefined.
+```
+
+```
+Uncaught TypeError: ‘undefined’ is not a function.
+```
+
+```
+Uncaught TypeError: map is not a function.
+```
+
+```
+Uncaught TypeError: Cannot read property ‘length’.
+```
+
+```notes
+You see this in your logs, you're in for a murder mystery
+```
+
+---
+
+# YOLO 😞
+
+- ❌ Errors may be cryptic
+- ❌ Difficult to find source and reason of error
+- ❌ Errors occur in unexpected places
+- ❌ Errors may bubble up (and crash the entire app)
+- ❌ "It works!" - are you sure?
+- ❌ Silent failures
+
+---
+
+# How do you prevent bugs in your code?
+
+---
+
+# TypeScript
+
+😍 🙌 🌈 ✨ 🦄
+
+---
+
+# What is TypeScript?
 
 ---
 
@@ -92,59 +301,59 @@ _Why?!_
 ## TS compiles to JS
 
 <Appear>
-  <div style={{ margin: "50px" }}>
+  <div style={{ margin: '50px' }}>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       .sass
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid yellow", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}
     >
       SASS Compiler
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       .css
     </span>
   </div>
-  <div style={{ margin: "50px" }}>
+  <div style={{ margin: '50px' }}>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       Modern JS
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid yellow", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}
     >
       Babel compiler
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       Compatible JS
     </span>
   </div>
-  <div style={{ margin: "50px" }}>
+  <div style={{ margin: '50px' }}>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       .ts
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid yellow", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}
     >
       TypeScript Compiler (tsc)
     </span>
-    <span style={{ margin: "10px" }}>👉</span>
+    <span style={{ margin: '10px' }}>👉</span>
     <span
-      style={{ border: "2px solid white", padding: "10px", margin: "10px" }}
+      style={{ border: '2px solid white', padding: '10px', margin: '10px' }}
     >
       .js
     </span>
@@ -188,19 +397,19 @@ _Why?!_
 
 <div
   style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   }}
 >
-  <div style={{ width: "50%" }}>
-    <img src="assets/images/js.png" style={{ width: "100%" }} />
+  <div style={{ width: '50%' }}>
+    <img src="assets/images/js.png" style={{ width: '100%' }} />
   </div>
-  <div style={{ margin: "50px" }}>
-    <div style={{ fontSize: "2em" }}>+</div>
+  <div style={{ margin: '50px' }}>
+    <div style={{ fontSize: '2em' }}>+</div>
   </div>
-  <div style={{ width: "50%" }}>
-    <img src="assets/images/superpower-1.jpg" style={{ width: "100%" }} />
+  <div style={{ width: '50%' }}>
+    <img src="assets/images/superpower-1.jpg" style={{ width: '100%' }} />
   </div>
 </div>
 
@@ -215,7 +424,7 @@ _Why?!_
 #1
 
 ```js
-var title = ["TypeScript", "is", "really", "cool"].join(" ").toUpperCase()
+var title = ['TypeScript', 'is', 'really', 'cool'].join(' ').toUpperCase();
 ```
 
 #2
@@ -229,7 +438,7 @@ define "title" = create Array("TypeScript", "is", "really", "cool")
 ---
 
 ```js
-var title = ["TypeScript", "is", "really", "cool"].join(" ").toUpperCase()
+var title = ['TypeScript', 'is', 'really', 'cool'].join(' ').toUpperCase();
 ```
 
 ---
@@ -241,7 +450,7 @@ var title = ["TypeScript", "is", "really", "cool"].join(" ").toUpperCase()
 Which organisation decided _this_ is JavaScript:
 
 ```js
-var title = ["TypeScript", "is", "really", "cool"].join(" ").toUpperCase()
+var title = ['TypeScript', 'is', 'really', 'cool'].join(' ').toUpperCase();
 ```
 
 But this is _not_ JavaScript:
@@ -344,7 +553,7 @@ Maybe touch on ES6 / ES2015
 
 # Quiz time: for three points!
 
-<div style={{ maxWidth: "70%", margin: "0 auto" }}>
+<div style={{ maxWidth: '70%', margin: '0 auto' }}>
   <Appear>
     <div>
       <Text>
@@ -425,13 +634,55 @@ https://github.com/tc39/proposals
 
 ---
 
+# JS + TS
+
+Super quick history
+
+![](assets/images/books.png)
+
+---
+
 <Image src="assets/images/yawn.gif" />
 
 ---
 
-A proposal can take _years_ to reach Stage 4 and land in JavaScript.
+# December 1999
 
-Meanwhile, someone was getting impatient...
+## ES3
+
+- Regex
+- Try / catch
+
+---
+
+# October 2008
+
+(~9 years later)
+
+## ES4
+
+- Abandoned
+- "Political differences"
+- Public fueds between Netscape, Mozilla, and Microsoft
+- Fun fact: Macromedia implemented ES4 into ActionScript!
+
+---
+
+# December 2009
+
+(~1 year later)
+
+## ES5
+
+- Strict mode
+- Aligning and clarifying existing standards
+- (Not much)
+
+---
+
+# Meanwhile
+
+Someone was getting impatient...
 
 ---
 
@@ -455,59 +706,32 @@ Meanwhile, someone was getting impatient...
 
 ---
 
-# JS + TS
+![](assets/images/anders-sad-angry.jpg)
 
-Super quick history
+- Reaching Stage 4 takes too long
+- Politics & BS = >:(
 
-![](assets/images/books.png)
-
----
-
-# December 1999
-
-- ES3
-- Regex
-- Try / catch
-
----
-
-# 2009
-
-(10 years later)
-
-- ES4 abandoned (political differences)
-- ES5 released
-- Strict mode
-- Aligning and clarifying existing standards
-- (Not much)
-
----
-
-# Meanwhile...
-
-- MS (especially Anders) not happy with ES / JS
-- Too slow
-- Too political
-- They wanted to use those proposed features _now_!
-
-![](assets/images/blueberry.jpg)
+```notes
+Want those proposed features _now_!
+```
 
 ---
 
 # 2010
 
-(1 year later)
+(~1 year late after ES5)
 
 - Anders started working on TypeScript
-- Started implementing <strong>Stage 3</strong> proposals
+- Started implementing <strong>Stage 3</strong> (candidate) proposals
 
 ---
 
 # October 2012
 
-(2 years later)
+(~2 years later)
 
-- 🎉 First TypeScript release!
+## 🎉 First TypeScript release 🎉
+
 - Classes
 - Arrow functions
 - Default parameters
@@ -517,20 +741,26 @@ Super quick history
 - Template strings
 - More!!
 
+```notes
+- Look familiar
+- 2012
+```
+
 ---
 
 # June 2015
 
-(3 years later)
+(~3 years later)
 
-- 🎉 ES6 finally released!
+## 🎉 ES6 release 🎉
+
 - All the features listed before
 
 ---
 
 # November 2015
 
-(3 months later)
+(~3 months later)
 
 - TS supports async / await
 
@@ -538,47 +768,45 @@ Super quick history
 
 # June 2017
 
-(1.5 years later)
+(~1.5 years later)
 
 - ES8 supports async / await
 
 ---
 
-# Today
+# History - Recap
 
-TS and JS features are pretty much the same.
+- MS / Anders created TS because JS was slow and political
+- TS implements TC39 proposals at Stage 3 (candidate)
+- TS and JS features were _very different_ until 2015 (ES6)
+- TS and JS features are _pretty similar_ these days
+
+```notes
+- Decorators is actually Stage 2, but really wanted it for Angular 2
+```
+
+---
+
+export default Split;
+
+<img src="assets/images/js-ts.png" />
 
 - Decorators
 - Abstract classes
 - Read only properties
 - Private / protected properties
+- Static types
+- ☝️ ?!?
 
 ---
 
-# QUICK RECAP
+# Static types
 
-- MS / Anders created TS because ES / JS was slow and outdated
-- TS implements TC39 proposals at Stage 3
-- TS and JS features were very different between 2012 - 2015
-- TS and JS features are very similar today since 2017
+It's the biggest differentiator
 
----
-
-# There must be _more_ to TypeScript?
-
-<Appear>
-  <div>
-    <Text>There is!</Text>
-  </div>
-  <div>
-    <Text>(hint: it's in the name)</Text>
-  </div>
-  <div>
-    <Text>
-      <strong>Type</strong>Script
-    </Text>
-  </div>
-</Appear>
+<strong style={{ fontSize: '2em' }}>
+  <u>Type</u>Script
+</strong>
 
 ---
 
@@ -587,19 +815,19 @@ TS and JS features are pretty much the same.
 ---
 
 ```javascript
-const name = "Jeremy"
-const age = 54
-const answer = name + age
-console.log(answer)
+const name = 'Jeremy';
+const age = 54;
+const answer = name + age;
+console.log(answer);
 ```
 
 ---
 
 ```javascript
-const name = "Jeremy"
-const age = 54
-const answer = name + age
-console.log(answer)
+const name = 'Jeremy';
+const age = 54;
+const answer = name + age;
+console.log(answer);
 ```
 
 ```
@@ -610,15 +838,27 @@ console.log(answer)
 
 # What happened?
 
+```javascript
+// HEY, MY NAME IS JAVASCRIPT
+// HERE I GO!
+
+const name = 'Jeremy'; // AWESOME!
+const age = 54; // ALRIGHT!
+const answer = name + age; // HUH? HANG ON...
+const answer = name + new Number(age).toString(); // THAT'S BETTER!
+console.log(answer); // COOL!
+
+// "Jeremy54"
+```
+
 ---
 
 # Weak types
 
-![](assets/images/weak.gif)
-
-(aka "loose" types)
-
 <Appear>
+  <div>
+    <img src="assets/images/macgyver.jpg" />
+  </div>
   <div>
     <Text>
       • JS
@@ -633,29 +873,22 @@ console.log(answer)
 
 ---
 
-Behind the scenes footage:
-
 ```javascript
-const name = "Jeremy"
-const age = 54
-const answer = name + new Number(age).toString()
-console.log(answer)
-// "Jeremy54"
+const name = 'Jeremy';
+const age = 54;
+const answer = name + age;
+console.log(answer);
 ```
+
+❌ Nope! Throw an error.
 
 ---
 
 # Strong types
 
-```javascript
-const answer = "Jeremy" + 54
-```
-
-Throws an error.
-
 <Appear>
   <div>
-    <img src="assets/images/strong.gif" />
+    <img src="assets/images/no-deal.png" />
   </div>
   <div>
     <Text>
@@ -676,16 +909,16 @@ Throws an error.
 ---
 
 ```js
-const name = "Jeremy"
-const answer1 = name.toLowerCase()
-console.log(answer1)
+const name = 'Jeremy';
+const answer1 = name.toLowerCase();
+console.log(answer1);
 
-const age = 42
-const answer2 = age.toLowerCase()
-console.log(answer2)
+const age = 42;
+const answer2 = age.toLowerCase();
+console.log(answer2);
 
-const answer3 = name + age
-console.log(answer3)
+const answer3 = name + age;
+console.log(answer3);
 ```
 
 ---
@@ -701,16 +934,16 @@ TypeError: age.toLowerCase is not a function
 // HEY, MY NAME IS JAVASCRIPT
 // HERE I GO!
 
-const name = "Jeremy" // SURE!
-const answer1 = name.toLowerCase() // SOUNDS GOOD!
-console.log(answer1) // ALRIGHTY!
+const name = 'Jeremy'; // SURE!
+const answer1 = name.toLowerCase(); // SOUNDS GOOD!
+console.log(answer1); // ALRIGHTY!
 
-const age = 42 // YEP!
-const answer2 = age.toLowerCase() // NOPE. BYE.
-console.log(answer2)
+const age = 42; // YEP!
+const answer2 = age.toLowerCase(); // NOPE. BYE.
+console.log(answer2);
 
-const answer3 = name + age
-console.log(answer3)
+const answer3 = name + age;
+console.log(answer3);
 ```
 
 ---
@@ -732,55 +965,26 @@ console.log(answer3)
   </div>
 </Appear>
 
-
 ---
-
-# Static types
-
-<Appear>
-  <div>
-    <Text>
-      Code is checked for type errors before executing anything.
-    </Text>
-    <Text>
-      Usually done when compiled.
-    </Text>
-  </div>
-</Appear>
-
----
-
-# Static types
 
 ```js
-const name = "Jeremy"
-const answer1 = name.toLowerCase()
-console.log(answer1)
+const name = 'Jeremy';
+const answer1 = name.toLowerCase();
+console.log(answer1);
 
-const age = 42
-const answer2 = age.toLowerCase()
-console.log(answer2)
+const age = 42;
+const answer2 = age.toLowerCase();
+console.log(answer2);
 
-const answer3 = name + age
-console.log(answer3)
+const answer3 = name + age;
+console.log(answer3);
 ```
 
-<Appear>
-  <div>
-    <Text>
-      Static type language says:
-    </Text>
-    </div><div>
-    <Text>
-      ❌ "Woah, hey, no, stop! SOMETHING IS WRONG!"
-    </Text>
-  </div>
-  <div>
-    <Text>
-      😵 "I'm not gonna even run this code!"
-    </Text>
-  </div>
-</Appear>
+Type checker / compiler:
+
+❌ "Woah, hey, no, stop! SOMETHING IS WRONG!"
+
+👎 "I'm not gonna even run this code!"
 
 ---
 
@@ -794,12 +998,13 @@ console.log(answer3)
       • Java
       <br />
       • C#
-      <br />
-      • C
+      <br />• C
     </Text>
   </div>
   <div>
-    <Text>and... <strong>TYPESCRIPT!</strong></Text>
+    <Text>
+      and... <strong>TypeScript!</strong>
+    </Text>
   </div>
 </Appear>
 
@@ -808,48 +1013,426 @@ console.log(answer3)
 <table style={{ fontSize: '2em' }}>
   <tr>
     <td>&nbsp;</td>
-    <td style={{ padding: "30px" }}>
-      <strong>🐧 Dynamic</strong>
+    <td style={{ padding: '30px' }}>
+      <strong>🐧⚽️ Dynamic</strong>
     </td>
-    <td style={{ padding: "30px" }}>
-      <strong>👷 Static</strong>
+    <td style={{ padding: '30px' }}>
+      <strong>👷‍♀️🔍 Static</strong>
     </td>
   </tr>
   <tr>
-    <td style={{ padding: "30px" }}>
-      <strong>🐣 Weak</strong>
+    <td style={{ padding: '30px' }}>
+      <strong>🛠 Weak</strong>
     </td>
-    <td style={{ padding: "30px" }}>
+    <td style={{ padding: '30px', border: '1px solid white' }}>
       • JavaScript
-      <br />
-      • PHP
+      <br />• PHP
     </td>
-    <td style={{ padding: "30px" }}>
+    <td style={{ padding: '30px', border: '1px solid white' }}>
       • TypeScript
-      <br />
-      • C
+      <br />• C
     </td>
   </tr>
   <tr>
-    <td style={{ padding: "30px" }}>
-      <strong>💪 Strong</strong>
+    <td style={{ padding: '30px' }}>
+      <strong>🚫 Strong</strong>
     </td>
-    <td style={{ padding: "30px" }}>
+    <td style={{ padding: '30px', border: '1px solid white' }}>
       • Python
-      <br />
-      • Ruby
+      <br />• Ruby
     </td>
-    <td style={{ padding: "30px" }}>
+    <td style={{ padding: '30px', border: '1px solid white' }}>
       • C#
-      <br />
-      • Java
+      <br />• Java
     </td>
   </tr>
 </table>
 
 ---
 
-![](assets/images/meh.gif)
+# TYPES RECAP
+
+- TS is weakly typed 🛠
+- TS is statically typed
+
+<div style={{ margin: '50px' }}>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .ts
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}>
+    tsc
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    👷👷‍♀️🔍 Type checking
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .js
+  </span>
+</div>
 
 ---
 
+# PRESO RECAP
+
+- You know what TS is (a language based on JS)
+- You know why TS was created (JS was slow, MS wanted modern features now)
+- You know the main difference between JS + TS (Static types)
+
+---
+
+# What's so good about static types?
+
+- I've been coding in JS for years just fine!
+
+---
+
+```js
+function startApp(app) {
+  // ...
+}
+```
+
+Task: Add `port` parameter.
+
+- Port is required
+- The port must be a number
+
+---
+
+- Defensive coding
+- Unit tests
+- Documentation
+
+---
+
+```ts
+function startApp(app: ExpressApplication, port: number) {
+  // ...
+}
+```
+
+---
+
+```ts
+startApp(app, 80);
+```
+
+<div style={{ margin: '50px' }}>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .ts
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}>
+    tsc
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    👷👷‍♀️🔍 Type checking
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid green', padding: '10px', margin: '10px' }}>
+    ✅
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .js
+  </span>
+</div>
+
+---
+
+```ts
+startApp(app, '80');
+```
+
+<div style={{ margin: '50px' }}>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .ts
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}>
+    tsc
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    👷👷‍♀️🔍 Type checking
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    ❌ Error - startApp() - 'port' must be a number
+  </span>
+</div>
+
+---
+
+Task: Allow port to be set by environment
+
+---
+
+```ts
+startApp(app, process.env.PORT);
+```
+
+---
+
+![](assets/images/start-app-1.png)
+
+---
+
+![](assets/images/start-app-2.png)
+
+---
+
+```ts
+// util.ts
+
+export function toNumber(x: string): number {
+  return parseInt(x, 10);
+}
+```
+
+---
+
+```ts
+// util.ts
+
+export const toNumber = (x: string): number => parseInt(x, 10);
+```
+
+---
+
+```ts
+const port: number = toNumber(process.env.PORT);
+
+startApp(app, port);
+```
+
+---
+
+```ts
+const port = toNumber(process.env.PORT);
+
+startApp(app, port);
+```
+
+---
+
+![](assets/images/start-app-3.png)
+
+---
+
+![](assets/images/start-app-4.png)
+
+---
+
+```ts
+const port = process.env.PORT && toNumber(process.env.PORT);
+
+startApp(app, port);
+```
+
+---
+
+![](assets/images/start-app-5.png)
+
+---
+
+![](assets/images/start-app-6.png)
+
+---
+
+```ts
+const port = process.env.PORT ? toNumber(process.env.PORT) : 80;
+
+startApp(app, port);
+```
+
+---
+
+# 🤖 🔍 ✅
+
+## A helpful robot sidekick
+
+Helping you write better code
+
+```notes
+Linting on steroids
+```
+
+---
+
+```ts
+function sendGifts(somebody: Person) {
+  // ...
+}
+```
+
+---
+
+```ts
+interface Person {
+  firstName: string;
+  lastName: string;
+  address: Address;
+}
+```
+
+---
+
+```ts
+interface Address {
+  street: string;
+  suburb: string;
+  country: Country;
+}
+```
+
+---
+
+```ts
+interface Country {
+  name: string;
+  shortCode: string;
+}
+```
+
+---
+
+![](assets/images/doc-demo.gif)
+
+---
+
+```js
+function sendGifts(somebody) {
+  const countryCode =
+    somebody &&
+    somebody.address &&
+    somebody.address.country &&
+    somebody.address.shortCode;
+
+  if (!countryCode) {
+    return;
+  }
+}
+```
+
+---
+
+```ts
+function sendGifts(somebody) {
+  const countryCode = somebody.address.country.shortCode;
+}
+```
+
+---
+
+![](assets/images/autocomplete.gif)
+
+---
+
+```ts
+const jeremy: Person = {
+  firstName: 'Jeremy',
+  lastName: 'Bearimy',
+  address: {
+    street: '42 Batman Road',
+    suburb: 'Melbourne',
+    country: {
+      name: 'Australia',
+      shortCode: 'AU',
+    },
+  },
+};
+```
+
+---
+
+```ts
+const incompleteJeremy: Person = {
+  firstName: 'Jeremy',
+  address: {
+    suburb: 'Melbourne',
+  },
+};
+```
+
+---
+
+Task: Change 'address' to an array
+
+---
+
+```ts
+interface Person {
+  firstName: string;
+  lastName: string;
+  address: [Address];
+}
+```
+
+---
+
+![](assets/images/folders.jpg)
+
+```notes
+Can you guarantee you didn't break anything?
+
+TYPESCRIPT CAN!
+```
+
+---
+
+# 😅
+
+---
+
+# TS 👍
+
+<Appear>
+  <div>
+    ✅ Helpful robot sidekick
+  </div>
+  <div>
+    ✅ Less mistakes
+  </div>
+  <div>
+    ✅ Autocomplete
+  </div>
+  <div>
+    ✅ Up-to-date docs
+  </div>
+  <div>
+    ✅ Code confidence
+  </div>
+  <div>
+    ✅ Less code to write, read, and maintain
+  </div>
+  <div>
+    ✅ Less unit tests
+  </div>
+  <div>
+    ✅ Improve error messages and debugging
+  </div>
+  <div>
+    ✅ Helps refactor
+  </div>
+</Appear>
+
+---
+
+# You made it!
+
+<Appear>
+  <div>
+    <Text>1. You know why TS exists</Text>
+  </div>
+  <div>
+    <Text>2. You know why developers use (and love) TS</Text>
+  </div>
+  <div>
+    <Text>3. 🤞 You really really wanna give TS a go! 🤞</Text>
+  </div>
+</Appear>
