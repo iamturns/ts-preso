@@ -12,11 +12,7 @@ export { theme } from './theme';
 
 ![](assets/images/ts-logo.png)
 
----
-
 # _Why?!_
-
----
 
 ---
 
@@ -63,14 +59,12 @@ NOT a rhetorical question. Get some answers!
 
 # Documentation!
 
----
-
 <Appear>
   <div>
-    <Text>- Name everything correctly</Text>
+    <Text>• Name everything correctly</Text>
   </div>
   <div>
-    <Text>- Sprinkle around some JSDoc when needed</Text>
+    <Text>• Sprinkle around some JSDoc when needed</Text>
   </div>
 </Appear>
 
@@ -80,12 +74,32 @@ NOT a rhetorical question. Get some answers!
 function getUsersInSuburb(suburb) {
   return getPeople().filter(u => u.suburb === suburb);
 }
+```
 
+```notes
+- User = People?
+- Refactor? Bad merge?
+```
+
+---
+
+```js
 /**
  * @param somebody - A person from the database
  */
 function sendGifts(somebody) {}
+```
 
+```notes
+- JSDoc!
+- Can I pass in `getUsers` into this?
+- Read implementaion
+- Not 100% sure
+```
+
+---
+
+```js
 /**
  * @property {Object} person
  * @property {string} person.name
@@ -98,13 +112,43 @@ function logUser(user) {
 
 ---
 
+```js
+/**
+ * @property {object} course
+ */
+function sendCourseToPacMan(course) {
+  // ...
+}
+```
+
+```notes
+Good luck documenting this!
+```
+
+---
+
 # Documentation 😞
 
-- ❌ Easily out of date
-- ❌ Difficult to refactor
-- ❌ Ambiguous
-- ❌ Often ignored
-- ✅ Sometimes useful (e.g. hacks)
+<Appear>
+  <div>
+    <Text>❌ Easily out of date</Text>
+  </div>
+  <div>
+    <Text>❌ Difficult to refactor</Text>
+  </div>
+  <div>
+    <Text>❌ Ambiguous</Text>
+  </div>
+  <div>
+    <Text>❌ Difficult for complex objects</Text>
+  </div>
+  <div>
+    <Text>❌ Often ignored</Text>
+  </div>
+  <div>
+    <Text>✅ Sometimes useful</Text>
+  </div>
+</Appear>
 
 ---
 
@@ -154,18 +198,29 @@ function sendGifts(somebody) {
 
 ---
 
-# Defensive coding
+# Defensive coding 😞
 
-- ❌ A lot of code to write, read, and maintain
-- ❌ Easy to forget checking something
-- ❌ Easy to get wrong
-- ❌ Code anxiety
-- ✅ Interacting with unpredictable sources (e.g. user input, external APIs)
+<Appear>
+  <div>
+    <Text>❌ A lot of code to write, read, and maintain</Text>
+  </div>
+  <div>
+    <Text>❌ Easy to miss something</Text>
+  </div>
+  <div>
+    <Text>❌ Code anxiety</Text>
+  </div>
+  <div>
+    <Text>✅ Interacting with unpredictable sources</Text>
+  </div>
+</Appear>
 
 ```notes
 1. "What's this code for?" - "Oh, just to be safe" 🙄
 
 - Anxiety = Will I receive the right inputs? Do I trust this function before passing in the inputs?
+
+- Tick = user input, external APIs, etc
 ```
 
 ---
@@ -204,11 +259,24 @@ Testing *one* parameter for *one* function
 
 # Unit tests 😞
 
-- ❌ Lots of code to write, read, and maintain
-- ❌ You need to test _a lot_ (every function, every param, every response)
-- ❌ Easy to forget to test something - things slip through the cracks
-- ❌ Annoying to maintain - update code, then fix unit tests
-- ✅ Testing business logic and custom features
+<Appear>
+  <div>
+    <Text>❌ Lots of code to write, read, and maintain</Text>
+  </div>
+  <div>
+    <Text>❌ Verbose</Text>
+  </div>
+  <div>
+    <Text>❌ Easy to forget to test something</Text>
+  </div>
+  <div>
+    <Text>✅ Great for business logic</Text>
+  </div>
+</Appear>
+
+```notes
+1. Every function, every param, every respones
+```
 
 ---
 
@@ -216,10 +284,27 @@ Testing *one* parameter for *one* function
 
 ---
 
-# YOLO!
+# Let errors happen naturally!
 
-"If someone calls my function incorrectly,
-I'm sure an error will happen _eventually_"
+<Appear>
+  <div>
+    <Text>If someone calls this function incorrectly...</Text>
+  </div>
+  <div>
+    <Text>
+      Then an error will <em>probably</em> happen...
+    </Text>
+  </div>
+  <div>
+    <Text>Eventually...</Text>
+  </div>
+  <div>
+    <Text>Somewhere...</Text>
+  </div>
+  <div>
+    <Text>¯\_(ツ)_/¯</Text>
+  </div>
+</Appear>
 
 ---
 
@@ -245,14 +330,29 @@ You see this in your logs, you're in for a murder mystery
 
 ---
 
-# YOLO 😞
+# Let errors happen naturally 😞
 
-- ❌ Errors may be cryptic
-- ❌ Difficult to find source and reason of error
-- ❌ Errors occur in unexpected places
-- ❌ Errors may bubble up (and crash the entire app)
-- ❌ "It works!" - are you sure?
-- ❌ Silent failures
+<Appear>
+  <div>
+    <Text>❌ Cryptic errors</Text>
+  </div>
+  <div>
+    <Text>❌ Errors occur in unexpected places</Text>
+  </div>
+  <div>
+    <Text>❌ Silent failures</Text>
+  </div>
+  <div>
+    <Text>❌ Errors may bubble up (and crash the entire app)</Text>
+  </div>
+  <div>
+    <Text>❌ "It worked for me!"</Text>
+  </div>
+</Appear>
+
+```notes
+Worked for me - limited local use. Every scenario? Every screen?
+```
 
 ---
 
@@ -260,9 +360,7 @@ You see this in your logs, you're in for a murder mystery
 
 ---
 
-# TypeScript
-
-😍 🙌 🌈 ✨ 🦄
+# 😍 🙌 🦄 🌈 ✨ TypeScript ✨ 🌈 🦄 🙌 😍
 
 ---
 
@@ -289,7 +387,7 @@ You see this in your logs, you're in for a murder mystery
     <Text>✅ Your JS code</Text>
   </div>
   <div>
-    <Text>✅ Third party JS code</Text>
+    <Text>✅ Third-party JS code</Text>
   </div>
   <div>
     <Text>✅ Yes really - JS works fine in TS!</Text>
@@ -367,13 +465,12 @@ You see this in your logs, you're in for a murder mystery
   <h2>🍽 TSC: Eats TS files</h2>
   <h2>💩 TSC: Poops out JS files</h2>
   <h2>🌎 Everything: Consumes JS (as usual)</h2>
-  <div>(browser, node, lambda, third party)</div>
-  <h1>Nobody knows you wrote TS</h1>
+  <div>(browser, node, lambda, third-party, etc)</div>
 </Appear>
 
 ---
 
-# TypeScript
+# What is TypeScript
 
 ## Quick recap
 
@@ -387,11 +484,14 @@ You see this in your logs, you're in for a murder mystery
   <div>
     <Text>✅ Compiles back to JS code</Text>
   </div>
+  <div>
+    <Text>✅ Nobody knows you wrote TS</Text>
+  </div>
 </Appear>
 
----
-
-# TS is not a big scary new thing
+```notes
+It's not a big scary new thing
+```
 
 ---
 
@@ -508,17 +608,14 @@ define "title" = create Array("TypeScript", "is", "really", "cool")
 
 They develop standards:
 
-<Appear>
-  <div>• CD-ROM file structure</div>
-  <div>• C#</div>
-  <div>• CLI</div>
-  <div>• Open Office XML</div>
-  <div>• JSON</div>
-  <div>• Dart</div>
-  <div>
-    <Text>and...</Text>
-  </div>
-</Appear>
+- CD-ROM file structure
+- C#
+- CLI
+- Open Office XML
+- JSON
+- Dart
+
+and...
 
 ---
 
@@ -546,7 +643,7 @@ They develop standards:
 </Appear>
 
 ```notes
-Maybe touch on ES6 / ES2015
+ES in ES6 = ECMAScript
 ```
 
 ---
@@ -602,9 +699,9 @@ TC39 devotes time to examining problem and solution
 
 ### Draft
 
-• Work on the syntax and formal specs
+Accepted!
 
-• TC39 expects the feature to be developed and included in the standard
+TC39 formalises specs and sytax
 
 ---
 
@@ -614,7 +711,7 @@ TC39 devotes time to examining problem and solution
 
 ### Candidate
 
-The proposal is ready to be implemented in code
+Ready to be implemented (in code)
 
 ---
 
@@ -624,7 +721,7 @@ The proposal is ready to be implemented in code
 
 ### Finished
 
-The feature is added to the next ECMAScript release
+Added to the next ECMAScript release
 
 ---
 
@@ -648,7 +745,7 @@ Super quick history
 
 # December 1999
 
-## ES3
+## ES3 released
 
 - Regex
 - Try / catch
@@ -659,11 +756,10 @@ Super quick history
 
 (~9 years later)
 
-## ES4
+## ES4 abandoned
 
-- Abandoned
-- "Political differences"
-- Public fueds between Netscape, Mozilla, and Microsoft
+- Political differences
+- Public feuds between Netscape, Mozilla, and Microsoft
 - Fun fact: Macromedia implemented ES4 into ActionScript!
 
 ---
@@ -672,11 +768,17 @@ Super quick history
 
 (~1 year later)
 
-## ES5
+## ES5 released
 
 - Strict mode
 - Aligning and clarifying existing standards
 - (Not much)
+
+---
+
+tldr
+
+~10 years, not much happened
 
 ---
 
@@ -709,7 +811,8 @@ Someone was getting impatient...
 ![](assets/images/anders-sad-angry.jpg)
 
 - Reaching Stage 4 takes too long
-- Politics & BS = >:(
+- Politics & BS
+- Wants those tasty proposals NOW!
 
 ```notes
 Want those proposed features _now_!
@@ -774,12 +877,26 @@ Want those proposed features _now_!
 
 ---
 
-# History - Recap
+# Quick recap
 
-- MS / Anders created TS because JS was slow and political
-- TS implements TC39 proposals at Stage 3 (candidate)
-- TS and JS features were _very different_ until 2015 (ES6)
-- TS and JS features are _pretty similar_ these days
+<Appear>
+  <div>
+    <Text>• JS was slow and political</Text>
+  </div>
+  <div>
+    <Text>• TS implements TC39 proposals at Stage 3 (candidate)</Text>
+  </div>
+  <div>
+    <Text>
+      • TS and JS features were <em>very different</em> until 2015 (ES6 release)
+    </Text>
+  </div>
+  <div>
+    <Text>
+      • TS and JS features are <em>very similar</em> today
+    </Text>
+  </div>
+</Appear>
 
 ```notes
 - Decorators is actually Stage 2, but really wanted it for Angular 2
@@ -794,9 +911,8 @@ export default Split;
 - Decorators
 - Abstract classes
 - Read only properties
-- Private / protected properties
+- Private & protected properties
 - Static types
-- ☝️ ?!?
 
 ---
 
@@ -844,11 +960,11 @@ console.log(answer);
 
 const name = 'Jeremy'; // AWESOME!
 const age = 54; // ALRIGHT!
-const answer = name + age; // HUH? HANG ON...
-const answer = name + new Number(age).toString(); // THAT'S BETTER!
-console.log(answer); // COOL!
+const answer = name + age; // HANG ON...
 
-// "Jeremy54"
+const answer = name + new Number(age).toString(); // THAT'S BETTER!
+
+console.log(answer); // "Jeremy54"
 ```
 
 ---
@@ -861,9 +977,9 @@ console.log(answer); // COOL!
   </div>
   <div>
     <Text>
-      • JS
+      • JavaScript
       <br />
-      • TS
+      • TypeScript
       <br />
       • PHP
       <br />• C
@@ -872,6 +988,8 @@ console.log(answer); // COOL!
 </Appear>
 
 ---
+
+# Strong types
 
 ```javascript
 const name = 'Jeremy';
@@ -886,10 +1004,9 @@ console.log(answer);
 
 # Strong types
 
+<img src="assets/images/no-deal.png" />
+
 <Appear>
-  <div>
-    <img src="assets/images/no-deal.png" />
-  </div>
   <div>
     <Text>
       • Python
@@ -913,7 +1030,7 @@ const name = 'Jeremy';
 const answer1 = name.toLowerCase();
 console.log(answer1);
 
-const age = 42;
+const age = 52;
 const answer2 = age.toLowerCase();
 console.log(answer2);
 
@@ -935,15 +1052,19 @@ TypeError: age.toLowerCase is not a function
 // HERE I GO!
 
 const name = 'Jeremy'; // SURE!
-const answer1 = name.toLowerCase(); // SOUNDS GOOD!
+const answer1 = name.toLowerCase(); // "jeremy"
 console.log(answer1); // ALRIGHTY!
 
-const age = 42; // YEP!
+const age = 52; // SOUNDS GOOD!
 const answer2 = age.toLowerCase(); // NOPE. BYE.
 console.log(answer2);
 
 const answer3 = name + age;
 console.log(answer3);
+```
+
+```notes
+Macgyver can't save this code
 ```
 
 ---
@@ -955,7 +1076,7 @@ console.log(answer3);
 <Appear>
   <div>
     <Text>
-      • JS
+      • JavaScript
       <br />
       • Python
       <br />
@@ -979,8 +1100,6 @@ console.log(answer2);
 const answer3 = name + age;
 console.log(answer3);
 ```
-
-Type checker / compiler:
 
 ❌ "Woah, hey, no, stop! SOMETHING IS WRONG!"
 
@@ -1050,10 +1169,10 @@ Type checker / compiler:
 
 ---
 
-# TYPES RECAP
+# Quick recap
 
-- TS is weakly typed 🛠
-- TS is statically typed
+- TypeScript is weakly typed 🛠
+- TypeScript is statically typed
 
 <div style={{ margin: '50px' }}>
   <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
@@ -1075,17 +1194,7 @@ Type checker / compiler:
 
 ---
 
-# PRESO RECAP
-
-- You know what TS is (a language based on JS)
-- You know why TS was created (JS was slow, MS wanted modern features now)
-- You know the main difference between JS + TS (Static types)
-
----
-
 # What's so good about static types?
-
-- I've been coding in JS for years just fine!
 
 ---
 
@@ -1095,16 +1204,56 @@ function startApp(app) {
 }
 ```
 
-Task: Add `port` parameter.
+---
 
-- Port is required
-- The port must be a number
+```js
+const app = new App();
+```
+
+```js
+const expressApp = createExpressApp();
+```
+
+```js
+startApp(/* ?!? */);
+```
 
 ---
 
-- Defensive coding
-- Unit tests
-- Documentation
+```ts
+function startApp(app: ExpressApplication) {
+  // ...
+}
+```
+
+---
+
+```ts
+function startApp(app: ExpressApplication) {
+  // ...
+}
+```
+
+Task: Add new parameter named 'port'.
+
+- Port is required
+- Port must be a number
+
+---
+
+# The JS Way
+
+<Appear>
+  <div>
+    <Text>• Defensive coding</Text>
+  </div>
+  <div>
+    <Text>• Unit tests</Text>
+  </div>
+  <div>
+    <Text>• Documentation</Text>
+  </div>
+</Appear>
 
 ---
 
@@ -1117,7 +1266,7 @@ function startApp(app: ExpressApplication, port: number) {
 ---
 
 ```ts
-startApp(app, 80);
+startApp(expressApp, 80);
 ```
 
 <div style={{ margin: '50px' }}>
@@ -1145,7 +1294,7 @@ startApp(app, 80);
 ---
 
 ```ts
-startApp(app, '80');
+startApp(expressApp, '80');
 ```
 
 <div style={{ margin: '50px' }}>
@@ -1168,7 +1317,7 @@ startApp(app, '80');
 
 ---
 
-Task: Allow port to be set by environment
+Task: Allow port to be set by environment variables
 
 ---
 
@@ -1270,8 +1419,6 @@ function sendGifts(somebody: Person) {
 }
 ```
 
----
-
 ```ts
 interface Person {
   firstName: string;
@@ -1301,6 +1448,74 @@ interface Country {
 
 ---
 
+```ts
+const jeremy: Person = {
+  firstName: 'Jeremy',
+  lastName: 'Bearimy',
+  address: {
+    street: '42 Batman Road',
+    suburb: 'Melbourne',
+    country: {
+      name: 'Australia',
+      shortCode: 'AU',
+    },
+  },
+};
+```
+
+<div style={{ margin: '50px' }}>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .ts
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}>
+    tsc
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    👷👷‍♀️🔍 Type checking
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid green', padding: '10px', margin: '10px' }}>
+    ✅
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .js
+  </span>
+</div>
+
+---
+
+```ts
+const incompleteJeremy: Person = {
+  firstName: 'Jeremy',
+  address: {
+    suburb: 'Melbourne',
+  },
+};
+```
+
+<div style={{ margin: '50px' }}>
+  <span style={{ border: '2px solid white', padding: '10px', margin: '10px' }}>
+    .ts
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid yellow', padding: '10px', margin: '10px' }}>
+    tsc
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    👷👷‍♀️🔍 Type checking
+  </span>
+  <span style={{ margin: '10px' }}>👉</span>
+  <span style={{ border: '2px solid red', padding: '10px', margin: '10px' }}>
+    ❌ 'incompleteJeremy' is missing properties X, Y, Z
+  </span>
+</div>
+
+---
+
 ![](assets/images/doc-demo.gif)
 
 ---
@@ -1322,46 +1537,27 @@ function sendGifts(somebody) {
 ---
 
 ```ts
-function sendGifts(somebody) {
+function sendGifts(somebody: Person) {
   const countryCode = somebody.address.country.shortCode;
 }
+```
+
+```notes
+Trust the compiler. Guarantee.
 ```
 
 ---
 
 ![](assets/images/autocomplete.gif)
 
----
-
-```ts
-const jeremy: Person = {
-  firstName: 'Jeremy',
-  lastName: 'Bearimy',
-  address: {
-    street: '42 Batman Road',
-    suburb: 'Melbourne',
-    country: {
-      name: 'Australia',
-      shortCode: 'AU',
-    },
-  },
-};
+```notes
+- Works for complex objects
+- Manipulating arrays
 ```
 
 ---
 
-```ts
-const incompleteJeremy: Person = {
-  firstName: 'Jeremy',
-  address: {
-    suburb: 'Melbourne',
-  },
-};
-```
-
----
-
-Task: Change 'address' to an array
+Task: Allow people to have multiple addresses
 
 ---
 
@@ -1385,40 +1581,120 @@ TYPESCRIPT CAN!
 
 ---
 
-# 😅
-
----
-
-# TS 👍
+# Refactoring
 
 <Appear>
   <div>
-    ✅ Helpful robot sidekick
+    <Text>✅ Rename exports</Text>
   </div>
   <div>
-    ✅ Less mistakes
+    <Text>✅ Rename properties</Text>
   </div>
   <div>
-    ✅ Autocomplete
+    <Text>✅ Rename files</Text>
+  </div>
+</Appear>
+
+```notes
+- TS knows how your app fits together 100%
+- VS Code has some plugins that tries to guess
+```
+
+---
+
+# Third-party libs
+
+<Appear>
+  <div>
+    <Text>✅ Written in TS? Boom.</Text>
   </div>
   <div>
-    ✅ Up-to-date docs
+    <Text>✅ Written in JS? ~5500 libraries manually typed.</Text>
   </div>
   <div>
-    ✅ Code confidence
+    <Text>✅ Reduce documentation lookup</Text>
   </div>
   <div>
-    ✅ Less code to write, read, and maintain
+    <Text>✅ Confidence on inputs and outputs</Text>
+  </div>
+</Appear>
+
+---
+
+# On the rise
+
+2018 Stack Overflow Survey results
+
+![](assets/images/popular.png)
+
+```notes
+- JS = #1
+- TS = #12
+- Beats out Ruby, Swift, and Go
+- Angular 2+
+```
+
+---
+
+# Downsides
+
+<Appear>
+  <div>
+    <Text>• May scare newbies</Text>
   </div>
   <div>
-    ✅ Less unit tests
+    <Text>• Verbose</Text>
   </div>
   <div>
-    ✅ Improve error messages and debugging
+    <Text>• Requires compile step</Text>
   </div>
   <div>
-    ✅ Helps refactor
+    <Text>• Complicates toolchain<br />(bundlers, test runners, linters, etc)</Text>
   </div>
+  <div>
+    <Text>• Bugs still possible</Text>
+  </div>
+  <div>
+    <Text>• May be overkill for small projects</Text>
+  </div>
+</Appear>
+
+---
+
+# ☝️ I'll try it!
+
+- http://www.typescriptlang.org/play/
+- https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html
+
+```
+npm install typescript -g
+cd /your-new-ts-app/
+tsc index.ts
+node index.js
+```
+
+```
+npm install ts-node -g
+ts-node index.ts
+```
+
+---
+
+# 💪 TypeScript 👍
+
+<Appear>
+  <div>✅ Helpful robot sidekick</div>
+  <div>✅ Less errors</div>
+  <div>✅ Autocomplete</div>
+  <div>✅ Up-to-date docs</div>
+  <div>✅ Less defensive coding</div>
+  <div>✅ Less code to write, read, and maintain</div>
+  <div>✅ Less unit tests</div>
+  <div>✅ Improve error messages and debugging</div>
+  <div>✅ Helps refactor</div>
+  <div>✅ Third-party library support</div>
+  <div>✅ Big community</div>
+  <div>✅ Growing</div>
 </Appear>
 
 ---
