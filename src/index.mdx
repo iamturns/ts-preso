@@ -822,8 +822,6 @@ Want those proposed features _now_!
 
 # 2010
 
-(~1 year late after ES5)
-
 - Anders started working on TypeScript
 - Started implementing <strong>Stage 3</strong> (candidate) proposals
 
@@ -908,21 +906,32 @@ export default Split;
 
 <img src="assets/images/js-ts.png" />
 
-- Decorators
-- Abstract classes
-- Read only properties
-- Private & protected properties
-- Static types
+<div>
+  <h1>Unique TS features</h1>
+  <Appear>
+    <div>
+      <Text>• Decorators</Text>
+    </div>
+    <div>
+      <Text>• Abstract classes</Text>
+    </div>
+    <div>
+      <Text>• Read only properties</Text>
+    </div>
+    <div>
+      <Text>• Private & protected properties</Text>
+    </div>
+    <div>
+      <Text>• Static types</Text>
+    </div>
+  </Appear>
+</div>
 
 ---
 
-# Static types
+# Static Types
 
-It's the biggest differentiator
-
-<strong style={{ fontSize: '2em' }}>
-  <u>Type</u>Script
-</strong>
+The biggest unique feature in <u>Type</u>Script
 
 ---
 
@@ -1052,8 +1061,8 @@ TypeError: age.toLowerCase is not a function
 // HERE I GO!
 
 const name = 'Jeremy'; // SURE!
-const answer1 = name.toLowerCase(); // "jeremy"
-console.log(answer1); // ALRIGHTY!
+const answer1 = name.toLowerCase(); // ALRIGHTY!
+console.log(answer1); // "jeremy"
 
 const age = 52; // SOUNDS GOOD!
 const answer2 = age.toLowerCase(); // NOPE. BYE.
@@ -1256,6 +1265,8 @@ Task: Add new parameter named 'port'.
 </Appear>
 
 ---
+
+# The TS Way
 
 ```ts
 function startApp(app: ExpressApplication, port: number) {
@@ -1649,7 +1660,11 @@ TYPESCRIPT CAN!
     <Text>• Requires compile step</Text>
   </div>
   <div>
-    <Text>• Complicates toolchain<br />(bundlers, test runners, linters, etc)</Text>
+    <Text>
+      • Complicates toolchain
+      <br />
+      (bundlers, test runners, linters, etc)
+    </Text>
   </div>
   <div>
     <Text>• Bugs still possible</Text>

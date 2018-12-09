@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "mdx-deck src/index.mdx",
-    "build": "mdx-deck build src/index.mdx",
+    "build": "mdx-deck build src/index.mdx --no-html",
     "pdf": "mdx-deck pdf src/index.mdx",
     "image": "mdx-deck screenshot src/index.mdx",
     "help": "mdx-deck"
